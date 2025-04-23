@@ -1,4 +1,3 @@
-// server/routes/score.js
 const express = require('express');
 const router = express.Router();
 const { addScore, getTopScores } = require('../database/scoreModel');

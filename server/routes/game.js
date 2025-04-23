@@ -1,14 +1,12 @@
-// server/routes/game.js
 const express = require('express');
 const router = express.Router();
 
 // Armazenar jogos ativos com seus números secretos
-// Em produção, isso deveria ser persistido em um banco de dados ou cache
 const activeGames = new Map();
 
 // Iniciar um novo jogo
 router.post('/new', (req, res) => {
-  // Gerar um ID único para o jogo (em produção, use algo mais seguro)
+  // Gerar um ID único para o jogo
   const gameId = Date.now().toString();
   
   // Gerar número aleatório entre 1 e 100
@@ -57,9 +55,6 @@ router.post('/:gameId/guess', (req, res) => {
       attempts: game.attempts,
       guesses: game.guesses
     };
-    
-    // Em um caso real, poderíamos manter o jogo para histórico ou removê-lo
-    // activeGames.delete(gameId);
     
     return res.json(result);
   } else if (numGuess < game.secretNumber) {
