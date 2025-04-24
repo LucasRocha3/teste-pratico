@@ -3,15 +3,46 @@ import styled from 'styled-components';
 import api from '../services/api';
 
 const GameContainer = styled.div`
-  background-color: white;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #f5f7fa 0%, #e4e8f0 100%);
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: #3498db;
+  }
 `;
 
 const Title = styled.h2`
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-size: 32px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #3498db;
+    border-radius: 3px;
+  }
 `;
 
 const GameForm = styled.form`
@@ -23,36 +54,162 @@ const GameForm = styled.form`
 
 const InputGroup = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 12px;
   
   @media (max-width: 500px) {
     flex-direction: column;
   }
+  
+  input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 2px solid #dce4ec;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #34495e;
+    
+    &:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      outline: none;
+    }
+    
+    &:disabled {
+      background-color: #ecf0f1;
+      cursor: not-allowed;
+    }
+    
+    &::placeholder {
+      color: #95a5a6;
+    }
+  }
+  
+  button {
+    padding: 14px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #3498db;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    &:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+    }
+  }
 `;
 
 const Message = styled.div`
-  padding: 15px;
+  padding: 18px;
   margin: 20px 0;
-  border-radius: 4px;
-  background-color: ${props => props.success ? '#d4edda' : props.error ? '#f8d7da' : '#cce5ff'};
-  color: ${props => props.success ? '#155724' : props.error ? '#721c24' : '#004085'};
-  border: 1px solid ${props => props.success ? '#c3e6cb' : props.error ? '#f5c6cb' : '#b8daff'};
+  border-radius: 10px;
+  background-color: ${props => props.success ? 'rgba(46, 204, 113, 0.2)' : props.error ? 'rgba(231, 76, 60, 0.2)' : 'rgba(52, 152, 219, 0.2)'};
+  color: ${props => props.success ? '#27ae60' : props.error ? '#c0392b' : '#2980b9'};
+  border-left: 5px solid ${props => props.success ? '#27ae60' : props.error ? '#c0392b' : '#2980b9'};
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '${props => props.success ? '✓' : props.error ? '✗' : 'ℹ'}';
+    font-size: 20px;
+    margin-right: 12px;
+  }
 `;
 
 const AttemptsCounter = styled.p`
   font-size: 18px;
-  margin-top: 20px;
+  margin: 25px 0;
+  text-align: center;
+  color: #34495e;
   
   span {
-    font-weight: bold;
-    color: #4a90e2;
+    font-weight: 700;
+    color: #9b59b6;
+    font-size: 24px;
+    display: inline-block;
+    min-width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background-color: rgba(155, 89, 182, 0.1);
+    border-radius: 50%;
+    margin: 0 5px;
   }
 `;
 
 const SaveScoreForm = styled.div`
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 2px dashed #bdc3c7;
+  position: relative;
+  
+  &::before {
+    content: '🏆';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f5f7fa;
+    font-size: 24px;
+    padding: 0 10px;
+  }
+`;
+
+const GameControls = styled.div`
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  
+  button {
+    padding: 14px 30px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(90deg, #2ecc71, #1abc9c);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    &::before {
+      content: '🎮';
+    }
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    &:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+    }
+  }
 `;
 
 function Game() {
@@ -201,11 +358,11 @@ function Game() {
       )}
       
       {(gameWon || scoreSaved) && (
-        <div style={{ marginTop: '20px' }}>
+        <GameControls>
           <button onClick={startNewGame} disabled={loading}>
             Novo Jogo
           </button>
-        </div>
+        </GameControls>
       )}
     </GameContainer>
   );

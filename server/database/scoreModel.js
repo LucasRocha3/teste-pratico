@@ -1,4 +1,3 @@
-// server/database/scoreModel.js
 const { db } = require('./db');
 
 // Adicionar nova pontuação

@@ -41,7 +41,7 @@ const Nav = styled.nav`
 function Header() {
   return (
     <HeaderContainer>
-      <Logo>Guess the Number</Logo>
+      <Logo>Teste Prático DTI</Logo>
       <Nav>
         <ul>
           <li>

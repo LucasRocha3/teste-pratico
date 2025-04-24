@@ -5,7 +5,7 @@ Aplicação web onde o usuário tenta adivinhar um número aleatório gerado pel
 ## Tecnologias utilizadas
 
 ### Backend
-- Node.js com Express
+- Node.js
 - SQLite para banco de dados
 - Arquitetura RESTful API
 - Jest para testes automatizados
