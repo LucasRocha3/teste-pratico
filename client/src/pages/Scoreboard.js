@@ -203,7 +203,7 @@ const RefreshButton = styled.button`
   padding: 12px 24px;
   border-radius: 8px;
   border: none;
-  background: linear-gradient(90deg, #2ecc71, #1abc9c);
+  background: #2ecc71;
   color: white;
   font-weight: 600;
   font-size: 16px;
