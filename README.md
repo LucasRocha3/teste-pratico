@@ -55,7 +55,7 @@ Aplicação web onde o usuário tenta adivinhar um número aleatório gerado pel
 1. Clone o repositório:
    ```bash
    git clone [URL_DO_REPOSITÓRIO]
-   cd testepratico
+   cd teste-pratico
    ```
 
 2. Instale as dependências do servidor:
