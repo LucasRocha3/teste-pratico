@@ -233,10 +233,6 @@ const RefreshButton = styled.button`
   }
 `;
 
-const DateCell = styled.td`
-  font-size: 14px;
-  color: #7f8c8d !important;
-`;
 
 function Scoreboard() {
   const [scores, setScores] = useState([]);
@@ -261,16 +257,6 @@ function Scoreboard() {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(date);
-  };
 
   return (
     <ScoreboardContainer>
@@ -291,7 +277,6 @@ function Scoreboard() {
               <th>Posição</th>
               <th>Nome</th>
               <th>Tentativas</th>
-              <th>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -300,7 +285,6 @@ function Scoreboard() {
                 <td>{index + 1}</td>
                 <td>{score.playerName}</td>
                 <td>{score.attempts}</td>
-                <DateCell>{formatDate(score.gameDate)}</DateCell>
               </tr>
             ))}
           </tbody>
