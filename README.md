@@ -1,5 +1,3 @@
-# Teste Prático DTI - Jogo de Adivinhação
-
 Aplicação web onde o usuário tenta adivinhar um número aleatório gerado pelo sistema. Desenvolvido com Node.js e React.
 
 ## Tecnologias utilizadas
